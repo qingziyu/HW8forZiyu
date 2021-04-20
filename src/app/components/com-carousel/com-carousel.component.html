@@ -1,0 +1,277 @@
+<div class="background">
+  <div class="carouselContainer">
+    <div class="banner">
+      {{dataReceived[1]}}
+    </div>
+    <ngb-carousel *ngIf="images">
+      <ng-template ngbSlide>
+<!--        第一页-->
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [routerLink]=ids[0] (click)="storeData(ids[0], images[0], titles[0])">
+                <div class="imgDiv">
+                  <img [src]="images[0]" alt="Random first slide" >
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[0]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[1] (click)="storeData(ids[1], images[1], titles[1])">
+                <div class="imgDiv">
+                  <img [src]="images[1]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[1]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[2] (click)="storeData(ids[2], images[2], titles[2])">
+                <div class="imgDiv">
+                  <img [src]="images[2]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[2]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[3] (click)="storeData(ids[3], images[3], titles[3])">
+                <div class="imgDiv">
+                  <img [src]="images[3]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[3]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[4] (click)="storeData(ids[4], images[4], titles[4])">
+                <div class="imgDiv">
+                  <img [src]="images[4]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[4]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [routerLink]=ids[5] (click)="storeData(ids[5], images[5], titles[5])">
+                <div class="imgDiv">
+                  <img [src]="images[5]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[5]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+<!--        第二页-->
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [routerLink]=ids[6] (click)="storeData(ids[6], images[6], titles[6])">
+                <div class="imgDiv">
+                  <img [src]="images[6]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[6]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[7] (click)="storeData(ids[7], images[7], titles[7])">
+                <div class="imgDiv">
+                  <img [src]="images[7]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[7]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[8] (click)="storeData(ids[8], images[8], titles[8])">
+                <div class="imgDiv">
+                  <img [src]="images[8]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[8]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[9] (click)="storeData(ids[9], images[9], titles[9])">
+                <div class="imgDiv">
+                  <img [src]="images[9]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[9]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[10] (click)="storeData(ids[10], images[10], titles[10])">
+                <div class="imgDiv">
+                  <img [src]="images[10]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[10]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [routerLink]=ids[11] (click)="storeData(ids[11], images[11], titles[11])">
+                <div class="imgDiv">
+                  <img [src]="images[11]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[11]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+<!--        第三页-->
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [routerLink]=ids[12] (click)="storeData(ids[12], images[12], titles[12])">
+                <div class="imgDiv">
+                  <img [src]="images[12]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[12]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[13] (click)="storeData(ids[13], images[13], titles[13])">
+                <div class="imgDiv">
+                  <img [src]="images[13]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[13]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[14] (click)="storeData(ids[14], images[14], titles[14])">
+                <div class="imgDiv">
+                  <img [src]="images[14]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[14]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[15] (click)="storeData(ids[15], images[15], titles[15])">
+                <div class="imgDiv">
+                  <img [src]="images[15]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[15]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [routerLink]=ids[16] (click)="storeData(ids[16], images[16], titles[16])">
+                <div class="imgDiv">
+                  <img [src]="images[16]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[16]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [routerLink]=ids[17] (click)="storeData(ids[17], images[17], titles[17])">
+                <div class="imgDiv">
+                  <img [src]="images[17]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[17]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+<!--        第四页-->
+        <div class="picsum-img-wrapper">
+          <div class="fourthCardsContainer">
+            <div class="cardContainer" style="margin-left: 160px; z-index: 999;">
+              <a [routerLink]=ids[18] (click)="storeData(ids[18], images[18], titles[18])">
+                <div class="imgDiv">
+                  <img [src]="images[18]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[18]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="margin-left: 30px">
+              <a [routerLink]=ids[19] (click)="storeData(ids[19], images[19], titles[19])">
+                <div class="imgDiv">
+                  <img [src]="images[19]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{titles[19]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>

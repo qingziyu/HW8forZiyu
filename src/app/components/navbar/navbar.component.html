@@ -1,0 +1,64 @@
+<div class="navbar">
+  <div class="banner">
+    USC Films
+  </div>
+  <div class="homeDiv">
+    <a routerLink="" routerLinkActive="active" class="homeBtn">Home</a>
+  </div>
+  <div class="listDiv">
+    <a routerLink="/mylist" routerLinkActive="active" class="listBtn">My List</a>
+  </div>
+  <div class="r-result">
+    <ng-template #rt let-r="result" let-t="term" class="resultContainer">
+      <a href={{r.ID}}>
+        <div class="r-row">
+          <div class="imgContainer">
+            <img [src]="r.poster_path" class="mr-1">
+          </div>
+          <div class="r-name">{{r.name}}</div>
+        </div>
+      </a>
+    </ng-template>
+  </div>
+
+  <fieldset class="form-inline">
+    <div class="form-group">
+      <input id="typeahead-http" type="text" class="form-control mx-sm-3" [inputFormatter]="formatter" [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search"
+             placeholder="Search" [resultTemplate]="rt" popupClass="r-search" />
+      <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+      <small *ngIf="searching" class="form-text text-muted">searching...</small>
+    </div>
+  </fieldset>
+</div>
+
+<!--<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000c21;">-->
+<!--  <a class="navbar-brand" href=" ">USC Films</a >-->
+<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--    <ul class="navbar-nav mr-auto">-->
+
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" routerLink="" [ngStyle]="{'color': (!rla2.isActive&&!rla.isActive)?'white':null}" >Home</a >-->
+<!--      </li>-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" routerLink="/mylist" routerLinkActive #rla="routerLinkActive" [ngStyle]="{'color': rla.isActive?'white':null}">My List</a >-->
+<!--      </li>-->
+<!--      <li class="nav-item" style="display: none;">-->
+<!--        <a class="nav-link" routerLink="/watch" routerLinkActive #rla2="routerLinkActive">detail</a >-->
+<!--      </li>-->
+<!--    </ul>-->
+
+<!--    <ng-template #rt let-r="result" >-->
+<!--      <a [href]="'/watch/'+r.media_type+'/'+r.id" style="color: white;">-->
+<!--        < img [src]="r.backdrop_path" class="searchImg" >-->
+<!--        <ngb-highlight [result]="r.name" ></ngb-highlight>-->
+<!--      </a >-->
+<!--    </ng-template>-->
+
+<!--    <form class="form-inline my-2 my-lg-0">-->
+<!--      <input id="typeahead-template" type="text" [ngbTypeahead]="search" [resultTemplate]="rt" placeholder="Search"/>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</nav>-->

@@ -1,0 +1,85 @@
+<div class="background"*ngIf="cur">
+  <div class="carouselContainer">
+    <div class="banner">
+      <p>Continue Watching</p>
+    </div>
+<!--    第一页-->
+    <ngb-carousel>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" *ngFor="let in of counter(timeOne); let i = index">
+              <a [routerLink]=cur[i].id>
+                <div class="imgDiv">
+                  <img [src]="cur[i].img" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{cur[i].title}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+<!--      第二页-->
+      <ng-template ngbSlide *ngIf="checkTwo">
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" *ngFor="let in of counter(timeTwo); let i = index">
+              <a [routerLink]=cur[getindex(i,1)].id>
+                <div class="imgDiv">
+                  <img [src]="cur[getindex(i,1)].img" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{cur[getindex(i,1)].title}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+<!--      第三页-->
+      <ng-template ngbSlide *ngIf="checkThree">
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" *ngFor="let in of counter(timeThree); let i = index">
+              <a [routerLink]=cur[getindex(i,2)].id>
+                <div class="imgDiv">
+                  <img [src]="cur[getindex(i,2)].img" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{cur[getindex(i,2)].title}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+<!--      第四页-->
+      <ng-template ngbSlide *ngIf="checkFour">
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" *ngFor="let in of counter(timeFour); let i = index">
+              <a [routerLink]=cur[getindex(i,3)].id>
+                <div class="imgDiv">
+                  <img [src]="cur[getindex(i,3)].img" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{cur[getindex(i,3)].title}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>

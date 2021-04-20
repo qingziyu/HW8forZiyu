@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div #noItem class="noItems" *ngIf="!showItems">
+  <p>No items found in Watchlist.</p>
+</div>
+<div class="listContainer" *ngIf="showItems">
+  <div class="banner">
+    <p>My WatchList</p>
+  </div>
+  <ul class="listUl">
+    <li *ngFor="let item of currentList; let i = index">
+      <div class="cardContainer">
+        <a [href]="currentList[i].id">
+          <div class="imgDiv">
+            <img [src]="currentList[i].img" alt="Random first slide">
+          </div>
+          <div class="cover">
+            <div class="coverWord">
+              {{currentList[i].title}}
+            </div>
+          </div>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,111 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  line-height: 60px;
+  height: 60px;
+  justify-content: normal;
+  color: white;
+}
+
+.navbar {
+  background-color: rgb(5, 10, 35);
+  white-space: nowrap;
+  position: relative;
+}
+
+.banner {
+  color: white;
+  text-align: center;
+  float: left;
+  width: 160px;
+}
+
+.homeDiv {
+  text-align: center;
+  width: 160px;
+  float: left;
+}
+
+.homeBtn {
+  color: white;
+}
+
+.listDiv {
+  text-align: center;
+  width: 160px;
+  float: left;
+}
+
+.navbar a {
+  color: rgb(100, 110, 125);
+}
+
+.navbar a:hover {
+  text-decoration: none;
+}
+
+.navbar a.active {
+  color: white;
+}
+
+.form-group input{
+  position: absolute;
+  float: right;
+  right: 70px;
+  background-color: rgb(5, 10, 35);
+  width: 225px;
+  height: 40px;
+  border-style: none;
+  border-bottom-style: solid;
+  border-bottom-color: white;
+ outline: none;
+  color: white;
+}
+
+.r-search {
+  background-color: #000;
+  z-index: 1;
+}
+
+.dropdown-item {
+  padding: 0px !important;
+  background: #000;
+  border: 1px solid #999;
+  color: white;
+}
+
+
+.r-row {
+  display: flex;
+  height: 60px;
+  width: 420px;
+}
+
+.r-row img{
+  height: 50px;
+  width: 80px;
+}
+
+.r-name {
+  white-space: nowrap;
+  padding-left: 10px;
+}
+
+::ng-deep .dropdown-menu {
+  background-color: rgb(5, 15, 70);
+}
+
+.imgContainer{
+  height: 40px;
+  width: 80px;
+}
+
+.imgContainer img{
+  height: 40px;
+  width: 80px;
+  max-width: 80px;
+  max-height: 40px;
+  object-fit:cover;
+}
+
+

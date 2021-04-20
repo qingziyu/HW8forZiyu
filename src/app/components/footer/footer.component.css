@@ -1,0 +1,8 @@
+.background{
+  background-image: linear-gradient(to top, black, rgb(5, 15, 70));
+  color: gray;
+  height: 150px;
+  width: auto;
+  line-height: 150px;
+  text-align: center;
+}

@@ -1,0 +1,84 @@
+.listContainer{
+  height: auto;
+  min-height: 850px;
+  background-color: rgb(5, 15, 70);
+  text-align: center;
+}
+
+.noItems{
+  min-height: 800px;
+  background-color: rgb(5, 15, 70);
+  color: white;
+  text-align: center;
+  padding-top: 100px;
+  font-size: xxx-large;
+}
+
+.banner{
+  font-size: 36px;
+  width: auto;
+  color: white;
+  text-align: left;
+  margin-left: 250px;
+  height: 150px;
+  padding-top: 50px;
+}
+
+
+.cover{
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 300px;
+  margin-left: 0px!important;
+}
+
+.cardContainer:hover .cover{
+  display: unset;
+  background-image: linear-gradient(to top,black 15%, transparent);
+  transform: scale(1.1);
+}
+
+.cardContainer:hover img{
+  transition-duration: 0.5s;
+  transform: scale(1.1);
+}
+
+.coverWord{
+  position: absolute;
+  bottom: 20px;
+  margin-left: 20px;
+  color: white;
+  font-size: medium;
+}
+
+.cardContainer{
+  height: 300px;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+
+.cardContainer img{
+  height: 300px;
+  width: 200px;
+  max-width: 200px;
+  max-height: 300px;
+  object-fit:cover;
+}
+
+.listUl{
+  display: flex;
+  flex-wrap: wrap;
+  width: 1410px;
+  margin: auto;
+  padding: 0;
+}
+
+.listUl li{
+  margin-bottom: 30px;
+  margin-left: 35px;
+}

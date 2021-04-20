@@ -1,0 +1,94 @@
+.background{
+  width: auto;
+  height: 500px;
+  background-color: rgb(5, 15, 70);
+  display: flex;
+}
+
+.banner{
+  padding-left: 130px;
+  width: auto;
+  height: 100px;
+  font-size: xxx-large;
+  color: white;
+}
+
+.carouselContainer{
+  height: 400px;
+  width: 1700px;
+  margin: auto;
+  background-color: rgb(5, 15, 70);
+}
+
+.carouselContainer img{
+  height: 300px;
+  width: 200px;
+  max-width: 200px;
+  max-height: 300px;
+  object-fit:cover;
+}
+
+.cardContainer{
+  height: 300px;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel.slide{
+  height: 360px;
+}
+
+.carousel.slide:focus{
+  outline: none;
+}
+
+.cardsContainer{
+  margin: auto;
+  display: flex;
+  height: 300px;
+  width: 1350px;
+}
+
+.cardsContainer  div:not(:first-child){
+  margin-left: 35px;
+}
+
+.cardsContainer div:first-child, div:last-child{
+  z-index: 999;
+}
+
+.fourthCardsContainer{
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cover{
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 300px;
+  margin-left: 0px!important;
+}
+
+.cardContainer:hover .cover{
+  display: unset;
+  background-image: linear-gradient(to top,black 15%, transparent);
+  transform: scale(1.1);
+}
+
+.cardContainer:hover img{
+  transition-duration: 0.5s;
+  transform: scale(1.1);
+}
+
+.coverWord{
+  position: absolute;
+  bottom: 20px;
+  margin-left: 20px;
+  color: white;
+  font-size: medium;
+}

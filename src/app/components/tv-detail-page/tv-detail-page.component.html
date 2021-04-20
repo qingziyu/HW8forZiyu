@@ -1,0 +1,695 @@
+<app-navbar></app-navbar>
+<div class="background">
+  <!--  电影信息-->
+  <div class="info">
+    <div class="videoContainer">
+      <youtube-player videoId="{{videoKey}}" height="440px" width="780px"></youtube-player>
+    </div>
+    <div class="infoContainer">
+      <h1>{{name}}</h1>
+      <h2 class="tagline">{{tagline}}</h2>
+      <h2>{{yearetc[0]}} | &#9733; {{yearetc[1]}}  |  {{yearetc[2]}}</h2>
+      <h2 class="genres">Genres: <span *ngFor="let genre of genres; index as i; let last = last "> {{genres[i].name}}{{last? '': ','}}&nbsp;  </span></h2>
+      <h2 class="language">Spoken Languages:<span *ngFor="let item of language; index as i"> {{language[i].name}}</span></h2>
+      <div class="addButtonContainer">
+        <div class="addButton" (click)="addToList(this.url, this.poster_path, this.name)" *ngIf="!listMember">
+          Add to Watchlist
+        </div>
+        <div class="added" *ngIf="showAddedPopup">
+          Added to Watchlist
+          <div class="addCloseBtn" (click)="changeAddPopup()">
+            &#10005;
+          </div>
+        </div>
+        <div class="removeButton" (click)="removeFromList(this.url)" *ngIf="listMember">
+          Remove from Watchlist
+        </div>
+        <div class="removed" *ngIf="showRemovedPopup">
+          Removed from watchlist
+          <div class="removeCloseBtn" (click)="changeRemovePopup()">
+            &#10005;
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  电影概述-->
+  <div class="descriptionContainer">
+    Description
+    <div class="overviewContainer">
+      {{overview}}
+    </div>
+  </div>
+  <!--  分享按钮-->
+  <div class="shareContainer">
+    Share
+    <div class="shareIcon">
+      <div class="twitterContainer">
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet">
+          <i class="fab fa-twitter" style="color: rgb(70, 120, 200); font-size: 60px"></i>
+        </a>
+      </div>
+      <div class="facebookContainer">
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+          <i class="fab fa-facebook-square" style="color: rgb(0, 50, 200); font-size: 60px"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!--  演员详情页-->
+  <div id="castDetailPage" *ngIf="showDetail" >
+    <div class="castname">{{castName}}</div>
+    <div class="closeDetail" (click)="closeDetail()">&#10005;</div>
+    <hr class="detailHr">
+    <div class="detailPic">
+      <img src="{{castDetailProfile}}" alt="" onerror="this.src ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHnPmUvFLjjmoYWAbLTEmLLIRCPpV_OgxCVA&usqp=CAU'">
+    </div>
+    <div class="detailContent">
+      <p *ngIf="castBirthday">Birth: {{castBirthday}}</p>
+      <p *ngIf="castBirthPlace">Birth Place: {{castBirthPlace}}</p>
+      <p *ngIf="castGender">Gender: {{castGender}}</p>
+      <p *ngIf="castWebsite">Website: <a href="{{castWebsite}}" class="castWeb">{{castWebsite}}</a></p>
+      <p *ngIf="castTalents">Known for: {{castTalents}}</p>
+      <p *ngIf="castOtherName.length != 0">Also Known as: <span *ngFor="let item of castOtherName; let i = index; let last = last">{{castOtherName[i]}}{{last? '': ','}}&nbsp;</span></p>
+      <a target="_blank" href="{{castImdbid}}" *ngIf="castImdbid" class="socialIcon">
+        <i class="fab fa-imdb" style="color: rgb(220, 180, 60)"></i>
+      </a>
+      <a target="_blank" href="{{castInsid}}" *ngIf="castInsid" class="socialIcon">
+        <i class="fab fa-instagram" style="color: rgb(120, 90, 120)"></i>
+      </a>
+      <a target="_blank" href="{{castFBid}}" *ngIf="castFBid" class="socialIcon">
+        <i class="fab fa-facebook-square" style="color: rgb(0, 60, 250)"></i>
+      </a>
+      <a target="_blank" href="{{castTWid}}" *ngIf="castTWid" class="socialIcon">
+        <i class="fab fa-twitter" style="color: rgb(90, 150, 250)"></i>
+      </a>
+    </div>
+    <div class="castBio" *ngIf="castBiography">
+      <span>Biography</span>
+      <p>{{castBiography}}</p>
+    </div>
+  </div>
+  <!-- 演员轮播图-->
+  <div class="cast">
+    <div class="castContainter">
+      <div class="castBanner">Full Cast and Crew</div>
+      <div class="castCardShow">
+        <ul class="castUl">
+          <li *ngFor="let item of castIDs; let i = index" class="castLi" (click)="getCastDetail(castIDs[i])">
+            <div class="photoContainer">
+              <img #castimg src="{{castProfile[i]}}" alt="" (error)="imgError(this.castimg)">
+            </div>
+            <div class="castInfoContainer">
+              <span>{{castNames[i]}}</span><br>
+              <span>AS</span><br>
+              {{castCharacter[i]}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--  电影评论-->
+  <div class="review" *ngIf="!(author.length == 0)">
+    <div class="reviewBanner">Reviews&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{author.length}}</span></div>
+    <ul class="reviewUl">
+      <li *ngFor="let item of author; let i = index" class="reviewLi">
+        <div class="leftContainer">
+          <div class="picContainer">
+            <img src="{{avatar[i]}}" alt="" onerror="this.src ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHnPmUvFLjjmoYWAbLTEmLLIRCPpV_OgxCVA&usqp=CAU'">
+          </div>
+        </div>
+        <div class="contentContainer">
+          <div class="userContainer">
+            <span>A review created bt {{author[i]}} </span>
+            <div class="starBox">
+              &#9733; {{rating[i]}}
+            </div>
+          </div>
+          <div class="timeContainer">
+            <span>Written by {{author[i]}} on {{getDate(reviewDate[i])}}</span>
+          </div>
+          <div class="reviewContent">
+            <p>{{content[i]}}</p>
+          </div>
+          <div class="reviewBtn">
+            <a href="{{reviewUrl[i]}}">Read the rest</a></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--  推荐电影-->
+  <div class="carouselContainer" *ngIf="recIds.length != 0">
+    <div class="carouselBanner">
+      Recommedned Movies
+    </div>
+    <ngb-carousel *ngIf="recIds">
+      <!--        第一页-->
+      <ng-template ngbSlide>
+
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=recIds[0]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[0]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[0]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[1]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[1]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[1]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[2]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[2]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[2]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[3]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[3]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[3]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[4]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[4]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[4]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=recIds[5]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[5]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[5]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!--        第二页-->
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=recIds[6]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[6]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[6]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[7]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[7]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[7]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[8]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[8]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[8]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[9]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[9]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[9]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[10]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[10]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[10]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=recIds[11]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[11]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[11]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!--        第三页-->
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=recIds[12]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[12]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[12]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[13]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[13]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[13]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[14]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[14]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[14]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[15]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[15]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[15]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=recIds[16]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[16]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[16]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=recIds[17]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[17]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[17]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!--        第四页-->
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="fourthCardsContainer">
+            <div class="cardContainer" style="margin-left: 160px; z-index: 999;">
+              <a [href]=recIds[18]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[18]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[18]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="margin-left: 30px">
+              <a [href]=recIds[19]>
+                <div class="imgDiv">
+                  <img [src]="recImgs[19]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{recTitles[19]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <!--  相似电影-->
+  <div class="carouselContainer" *ngIf="simIds.length != 0">
+    <div class="carouselBanner">
+      Similar Movies
+    </div>
+    <ngb-carousel *ngIf="recIds">
+      <!--        第一页-->
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=simIds[0]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[0]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[0]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[1]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[1]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[1]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[2]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[2]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[2]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[3]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[3]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[3]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[4]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[4]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[4]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=simIds[5]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[5]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[5]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!--        第二页-->
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=simIds[6]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[6]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[6]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[7]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[7]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[7]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[8]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[8]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[8]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[9]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[9]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[9]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[10]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[10]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[10]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=simIds[11]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[11]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[11]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!--        第三页-->
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="cardsContainer">
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=simIds[12]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[12]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[12]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[13]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[13]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[13]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[14]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[14]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[14]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[15]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[15]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[15]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer">
+              <a [href]=simIds[16]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[16]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[16]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="z-index: 999;">
+              <a [href]=simIds[17]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[17]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[17]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!--        第四页-->
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <div class="fourthCardsContainer">
+            <div class="cardContainer" style="margin-left: 160px; z-index: 999;">
+              <a [href]=simIds[18]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[18]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[18]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="cardContainer" style="margin-left: 30px">
+              <a [href]=simIds[19]>
+                <div class="imgDiv">
+                  <img [src]="simImgs[19]" alt="Random first slide">
+                </div>
+                <div class="cover">
+                  <div class="coverWord">
+                    {{simTitles[19]}}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+</div>
+<app-footer></app-footer>
